@@ -1,5 +1,5 @@
 body {
-    background-color: blue;
+    background-color: rgb(157, 67, 37);
     color: white;
     display: flex;
     justify-content: center;
@@ -19,6 +19,10 @@ body {
     background-color: #f9f9f9;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
+}
+.row {
+    color: rgb(142, 43, 142); /* Set the text color to purple */
+    background-color: transparent; /* Make the background transparent (optional, depends on your design) */
 }
 
 /* Styling each input container */
