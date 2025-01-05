@@ -1,5 +1,8 @@
 body {
-    background-color: blue;
+    background-image: url('food.jpg');
+    background-size: cover; /* Ensures the image covers the entire viewport */
+    background-position: center; /* Centers the image in the viewport */
+    background-repeat: no-repeat; /* Prevents the image from tiling */
     color: white;
     display: flex;
     justify-content: center;
@@ -7,6 +10,7 @@ body {
     height: 100vh;
     margin: 0;
 }
+
 
 
 /* Styling the form container */
@@ -20,29 +24,40 @@ body {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-family: Arial, sans-serif;
 }
+.row {
+    color: rgb(142, 43, 142); /* Set the text color to purple */
+    background-color: transparent; /* Make the background transparent (optional, depends on your design) */
+}
 
 /* Styling each input container */
 .input-container {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    width: 100%; /* Ensures the input container spans the full width of its parent */
+    max-width: 600px; /* Optional: Adds a maximum width for better control */
 }
 
 /* Styling textboxes */
 .input-container input {
-    flex: 1;
+    flex: 1; /* Ensures the input box takes up available space */
     padding: 8px 10px;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
     margin-right: 10px;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, width 0.3s ease; /* Smooth transition for width changes */
+    width: 100%; /* Makes the input box fill the container */
+    box-sizing: border-box; /* Includes padding and border in the width */
+    min-width: 0; /* Prevents the input from shrinking too small */
 }
 
 .input-container input:focus {
     border-color: #007BFF;
     outline: none;
+    width: 100%; /* Ensures consistent fit when typing */
 }
+
 
 /* Styling the plus button */
 .input-container button {
@@ -84,7 +99,7 @@ h1 {
 
 /* Optional: Increase border thickness */
 .tablebottom td {
-    border: 2px solid black;
+    border: 4px solid rgb(147, 183, 15);
 }
 
   .wrapper{
