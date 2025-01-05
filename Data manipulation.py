@@ -1,4 +1,4 @@
-data = {'Apples':4,'Bananas':4,'Oranges':3,'Grapes':9,'Peaches':2}
+data = {'Apples':4,'Bananas':3,'Oranges':3,'Grapes':9,'Peaches':2}
 
 calendar_list = []
 list_length = 21
@@ -26,12 +26,8 @@ for food_item in data:
                     break
             second_counter = second_counter + 1
         counter = counter + 1
-
-
-
     ## decreaing the list length
     list_length = list_length - number
-
 
 
 ## converting the food item to a list

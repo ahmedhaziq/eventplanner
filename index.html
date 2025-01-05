@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-   <marquee class="marquee"> <h1><strong><em><u><i>Welcome to Our Website</i></u></em></strong></h1></marquee>
+    <marquee class="marquee"> <h1><strong><em><u><i>Welcome to Our Website</i></u></em></strong></h1></marquee>
     <div class="wrapper">
     <div class = "top-container">
     <form id="form">
         <div id="input-container-wrapper">
             <div class="input-container">
-                <input type="text" name="textbox" id="textbox-1" placeholder="Enter text">
+                <input type="text" name="textbox" id="textbox-1" placeholder="Enter the food">
+                <input type="number" name="quantity" id="quantity-1" placeholder="Num">
                 <button type="button" onclick="addTextbox()">+</button>
             </div>
         </div>
@@ -24,22 +25,24 @@
         function addTextbox() {
             const wrapper = document.getElementById("input-container-wrapper");
             const currentTextbox = wrapper.querySelector("input[name='textbox']");
-            
+
             if (currentTextbox.value.trim() !== "") {
                 // Save current textbox value
                 const savedValue = currentTextbox.value;
+                const savedQuantity = document.getElementById("quantity-1").value;
 
                 // Create a new input container with the saved value
                 const newInputContainer = document.createElement("div");
                 newInputContainer.className = "input-container";
                 newInputContainer.innerHTML = `
                     <input type="text" name="textbox" value="${savedValue}" readonly>
-                    
+                    <input type="number" name="quantity" value="${savedQuantity}" readonly>
                 `;
-                wrapper.insertBefore(newInputContainer, wrapper.lastChild);  // Insert at the top
 
+                wrapper.insertBefore(newInputContainer, wrapper.lastChild);  // Insert at the top
                 // Clear the current textbox and focus it
                 currentTextbox.value = "";
+                document.getElementById("quantity-1").value = "";
                 currentTextbox.focus();
             } else {
                 alert("Please enter some text before adding.");
