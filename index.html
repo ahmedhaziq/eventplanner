@@ -7,97 +7,113 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <marquee class="marquee"> <h1><strong><em><u><i>Welcome to Our Website</i></u></em></strong></h1></marquee>
+    <marquee class="marquee">
+        <h1><strong><em><u><i>Welcome to Our Website</i></u></em></strong></h1>
+    </marquee>
     <div class="wrapper">
-    <div class = "top-container">
-    <form id="form">
-        <div id="input-container-wrapper">
-            <div class="input-container">
-                <input type="text" name="textbox" id="textbox-1" placeholder="Enter the food">
-                <input type="number" name="quantity" id="quantity-1" placeholder="Num">
-                <button type="button" onclick="addTextbox()">+</button>
+        <div class="top-container">
+            <form id="form">
+                <div id="input-container-wrapper">
+                    <div class="input-container">
+                        <input type="text" name="textbox" id="textbox-1" placeholder="Enter the food">
+                        <input type="number" name="quantity" id="quantity-1" placeholder="Num">
+                        <button type="button" onclick="addTextbox()">+</button>
+                    </div>
+                </div>
+                <button type="submit" id="submit-button">Submit</button>
+            </form>
+        </div>
+        
+        <div class="tablebottom">
+            <div class="fancy-text">
+                <table id="meal-table">
+                    <tr>
+                        <td></td>
+                        <td>Monday</td>
+                        <td>Tuesday</td>
+                        <td>Wednesday</td>
+                        <td>Thursday</td>
+                        <td>Friday</td>
+                        <td>Saturday</td>
+                        <td>Sunday</td>
+                    </tr>
+                    <tr>
+                        <td>Breakfast</td>
+                        <td id="monday-breakfast"></td>
+                        <td id="tuesday-breakfast"></td>
+                        <td id="wednesday-breakfast"></td>
+                        <td id="thursday-breakfast"></td>
+                        <td id="friday-breakfast"></td>
+                        <td id="saturday-breakfast"></td>
+                        <td id="sunday-breakfast"></td>
+                    </tr>
+                    <tr>
+                        <td>Lunch</td>
+                        <td id="monday-lunch"></td>
+                        <td id="tuesday-lunch"></td>
+                        <td id="wednesday-lunch"></td>
+                        <td id="thursday-lunch"></td>
+                        <td id="friday-lunch"></td>
+                        <td id="saturday-lunch"></td>
+                        <td id="sunday-lunch"></td>
+                    </tr>
+                    <tr>
+                        <td>Dinner</td>
+                        <td id="monday-dinner"></td>
+                        <td id="tuesday-dinner"></td>
+                        <td id="wednesday-dinner"></td>
+                        <td id="thursday-dinner"></td>
+                        <td id="friday-dinner"></td>
+                        <td id="saturday-dinner"></td>
+                        <td id="sunday-dinner"></td>
+                    </tr>
+                </table>
             </div>
         </div>
-        <button type="submit" id="submit-button">Submit</button>
-    </form>
+    </div>
+    <footer>
+        <p>&copy; 2024 William Lebris. All rights reserved.</p>
+    </footer>
 
     <script>
+        let dayIndex = 0; // Start with Monday
+        const days = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
+        const meals = ["breakfast", "lunch", "dinner"];
+        let mealIndex = 0; // Start with Breakfast
+
         function addTextbox() {
-            const wrapper = document.getElementById("input-container-wrapper");
-            const currentTextbox = wrapper.querySelector("input[name='textbox']");
+            const foodInput = document.getElementById("textbox-1");
+            const quantityInput = document.getElementById("quantity-1");
 
-            if (currentTextbox.value.trim() !== "") {
-                // Save current textbox value
-                const savedValue = currentTextbox.value;
-                const savedQuantity = document.getElementById("quantity-1").value;
+            if (foodInput.value.trim() !== "" && quantityInput.value.trim() !== "") {
+                const food = foodInput.value;
+                const quantity = quantityInput.value;
 
-                // Create a new input container with the saved value
-                const newInputContainer = document.createElement("div");
-                newInputContainer.className = "input-container";
-                newInputContainer.innerHTML = `
-                    <input type="text" name="textbox" value="${savedValue}" readonly>
-                    <input type="number" name="quantity" value="${savedQuantity}" readonly>
-                `;
+                // Determine the current cell to fill
+                const day = days[dayIndex];
+                const meal = meals[mealIndex];
+                const cellId = `${day}-${meal}`;
+                const cell = document.getElementById(cellId);
+                
+                // Fill the cell with the food and quantity
+                if (cell) {
+                    cell.innerHTML = `${food} (${quantity})`;
+                }
 
-                wrapper.insertBefore(newInputContainer, wrapper.lastChild);  // Insert at the top
-                // Clear the current textbox and focus it
-                currentTextbox.value = "";
-                document.getElementById("quantity-1").value = "";
-                currentTextbox.focus();
+                // Update day and meal indices
+                mealIndex = (mealIndex + 1) % meals.length;
+                if (mealIndex === 0) {
+                    dayIndex = (dayIndex + 1) % days.length;
+                }
+
+                // Clear the input fields
+                foodInput.value = "";
+                quantityInput.value = "";
+                foodInput.focus();
             } else {
-                alert("Please enter some text before adding.");
+                alert("Please enter both food and quantity before adding.");
             }
         }
     </script>
-    </div>
-    
-    
-    <div class="tablebottom">
-        <div class="fancy-text">
-            <table>
-                <tr>
-                    <td>Monday</td>
-                    <td>Tuesday</td>
-                    <td>Wednesday</td>
-                    <td>Thursday</td>
-                    <td>Friday</td>
-                    <td>Saturday</td>
-                    <td>Sunday</td>
-    
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
-            </div>
-            </div>
-            </div>
-            <footer>
-               <p>&copy; 2024 William Lebris. All rights reserved.</p>
-            </footer>
 </body>
 </html>
