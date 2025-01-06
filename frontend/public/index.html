@@ -1,15 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weekly Meal Planner</title>
-  </head>
-  <body>
-    <!-- React 会将组件挂载到这里 -->
-    <div id="root"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Meal Planner</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Weekly Meal Planner</h1>
+    <form id="meal-form">
+      <label for="meals">Enter your meals for the week (comma-separated):</label>
+      <input type="text" id="meals" name="meals" placeholder="e.g., pasta, salad, sushi" required>
+      <button type="submit">Generate Meal Plan</button>
+    </form>
+    <div id="meal-calendar" class="calendar"></div>
+  </div>
 
-    <!-- 静态资源（由 React 构建生成） -->
-    <script defer="defer" src="/static/js/main.js"></script>
-  </body>
+  <script>
+    document.getElementById('meal-form').addEventListener('submit', async function (event) {
+      event.preventDefault();
+      const mealsInput = document.getElementById('meals').value;
+
+      try {
+        // 使用 Axios 发起 POST 请求
+        const response = await fetch('http://127.0.0.1:5000/api/meals', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ meals: mealsInput.split(',').map(meal => meal.trim()) }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch the meal plan');
+        }
+
+        const data = await response.json();
+        const mealPlan = data.meal_plan;
+
+        // 渲染返回的 Meal Plan
+        const calendar = document.getElementById('meal-calendar');
+        calendar.innerHTML = `<h2>Your Weekly Meal Plan</h2><pre>${mealPlan}</pre>`;
+      } catch (error) {
+        alert('Error: ' + error.message);
+      }
+    });
+  </script>
+</body>
 </html>
